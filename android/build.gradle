@@ -36,7 +36,7 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
-    implementation 'com.github.MasayukiSuda:ExoPlayerFilter:v0.2.6'
+    implementation 'com.github.nongtm:ExoPlayerFilter:v0.2.7'
     implementation 'com.github.MasayukiSuda:Mp4Composer-android:v0.4.1'
 
     // All support libs must use the same version
