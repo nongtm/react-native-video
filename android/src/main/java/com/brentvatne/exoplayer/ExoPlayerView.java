@@ -28,6 +28,7 @@ import com.google.android.exoplayer2.ui.AdViewProvider;
 import com.google.android.exoplayer2.ui.SubtitleView;
 import com.google.android.exoplayer2.util.Assertions;
 import com.google.android.exoplayer2.video.VideoSize;
+import com.google.android.exoplayer2.video.VideoListener;
 
 import java.util.List;
 

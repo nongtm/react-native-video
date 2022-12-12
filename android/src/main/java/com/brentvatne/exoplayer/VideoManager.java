@@ -68,6 +68,11 @@ public class VideoManager extends ReactContextBaseJavaModule {
                         promise.resolve(exception.getMessage());
                         Log.d("failed", "onFailed()");
                     }
+
+                    @Override
+                    public void onCurrentWrittenVideoTime(long timeUs) {
+
+                    }
                 })
                 .start();
 
