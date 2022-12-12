@@ -36,6 +36,9 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
+    implementation 'com.github.MasayukiSuda:ExoPlayerFilter:v0.2.6'
+    implementation 'com.github.MasayukiSuda:Mp4Composer-android:v0.4.1'
+
     // All support libs must use the same version
     implementation "androidx.annotation:annotation:1.1.0"
     implementation "androidx.core:core:1.1.0"

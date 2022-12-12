@@ -5,9 +5,11 @@ import { ViewPropTypes, ImagePropTypes } from 'deprecated-react-native-prop-type
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 import TextTrackType from './TextTrackType';
 import FilterType from './FilterType';
+import AndroidFilterType from './AndroidFilterType'
 import DRMType from './DRMType';
 import VideoResizeMode from './VideoResizeMode.js';
 
+// Changes based on https://github.com/react-native-video/react-native-video/pull/1671/files
 const styles = StyleSheet.create({
   base: {
     overflow: 'hidden',
@@ -15,7 +17,7 @@ const styles = StyleSheet.create({
 });
 
 const { VideoDecoderProperties } = NativeModules
-export { TextTrackType, FilterType, DRMType, VideoDecoderProperties }
+export { TextTrackType, FilterType, AndroidFilterType, DRMType, VideoDecoderProperties }
 
 export default class Video extends Component {
 
@@ -78,7 +80,16 @@ export default class Video extends Component {
   };
 
   save = async (options?) => {
-    return await NativeModules.VideoManager.save(options, findNodeHandle(this._root));
+    if (Platform.OS === 'android') {
+      const { filterText, inputUrl, outputUrl } = options;
+      return await NativeModules.VideoManager.save(
+        filterText,
+        inputUrl,
+        outputUrl
+      );
+    } else {
+      return await NativeModules.VideoManager.save(options, findNodeHandle(this._root));
+    }
   }
 
   restoreUserInterfaceForPictureInPictureStopCompleted = (restored) => {
@@ -391,6 +402,20 @@ Video.propTypes = {
     FilterType.TONAL,
     FilterType.TRANSFER,
     FilterType.SEPIA,
+    AndroidFilterType.NONE,
+    AndroidFilterType.GRAY_SCALE,
+    AndroidFilterType.SEPIA,
+    AndroidFilterType.INVERT,
+    AndroidFilterType.HAZE,
+    AndroidFilterType.MONOCHROME,
+    AndroidFilterType.BILATERAL_BLUR,
+    AndroidFilterType.SPHERE_REFRACTION,
+    AndroidFilterType.VIGNETTE,
+    AndroidFilterType.FILTER_GROUP_SAMPLE,
+    AndroidFilterType.GAUSSIAN_FILTER,
+    AndroidFilterType.BULGE_DISTORTION,
+    AndroidFilterType.CGA_COLORSPACE,
+    AndroidFilterType.BOX_BLUR,
   ]),
   filterEnabled: PropTypes.bool,
   /* Native only */
